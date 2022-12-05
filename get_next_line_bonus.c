@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 16:53:52 by jpelaez-          #+#    #+#             */
-/*   Updated: 2022/12/05 14:31:15 by jpelaez-         ###   ########.fr       */
+/*   Created: 2022/12/05 14:34:09 by jpelaez-          #+#    #+#             */
+/*   Updated: 2022/12/05 16:41:51 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_line(int fd, char *saved)
 {
@@ -74,17 +74,17 @@ char	*next_line(char *sv)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*saved;
+	static char	*saved[1024];
 
 	if (fd == -1 || read(fd, NULL, 0) < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (saved == NULL)
+	if (saved[fd] == NULL)
 	{
-		saved = (char *)malloc(1 * sizeof(char));
-		saved[0] = '\0';
+		saved[fd] = (char *)malloc(1 * sizeof(char));
+		saved[fd][0] = '\0';
 	}
-	saved = read_line(fd, saved);
-	line = get_line(saved);
-	saved = next_line(saved);
+	saved[fd] = read_line(fd, saved[fd]);
+	line = get_line(saved[fd]);
+	saved[fd] = next_line(saved[fd]);
 	return (line);
 }
