@@ -6,13 +6,13 @@
 /*   By: jpelaez- <jpelaez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 14:34:09 by jpelaez-          #+#    #+#             */
-/*   Updated: 2022/12/05 16:41:51 by jpelaez-         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:09:12 by jpelaez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*read_line(int fd, char *saved)
+static char	*read_line(int fd, char *saved)
 {
 	int		byte_r;
 	char	*buffer;
@@ -36,7 +36,7 @@ char	*read_line(int fd, char *saved)
 	return (saved);
 }
 
-char	*get_line(char *sv)
+static char	*get_line(char *sv)
 {
 	size_t	i;
 	char	*line;
@@ -52,7 +52,7 @@ char	*get_line(char *sv)
 	return (line);
 }
 
-char	*next_line(char *sv)
+static char	*next_line(char *sv)
 {
 	size_t	i;
 	char	*new_saved;
